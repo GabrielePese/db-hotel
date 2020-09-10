@@ -1,0 +1,19 @@
+GOAL: produrre le query per rispondere alle seguenti interrogazioni
+    • Seleziona tutti gli ospiti che sono stati identificati con la carta di identità
+    • Seleziona tutti gli ospiti che sono nati dopo il 1988
+    • Seleziona tutti gli ospiti che hanno più di 20 anni (al momento dell'esecuzione della query)
+    • Seleziona tutti gli ospiti il cui nome inizia con la D
+    • Calcola il totale degli ordini accepted
+    • Qual è il prezzo massimo pagato?
+    • Seleziona gli ospiti riconosciuti con patente e nati nel 1975
+    • Quanti posti letto ha l'hotel in totale?
+
+
+1  SELECT * FROM ospiti WHERE document_type LIKE 'ci'
+2  SELECT* FROM ospiti WHERE date_of_birth > "1988-01-01 00:00:00"
+3  SELECT * FROM ospiti WHERE (YEAR(GETDATE())- YEAR(date_of_birth)) > 20
+4  SELECT * FROM ospiti WHERE name LIKE 'd%'
+5  SELECT COUNT(*) AS status FROM pagamenti WHERE status LIKE 'accepted'
+6  SELECT MAX(price) FROM pagamenti
+7  SELECT * from ospiti WHERE document_type = 'driver license'AND YEAR(date_of_birth) = '1975'
+8  SELECT SUM(beds) FROM `stanze`
