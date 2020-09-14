@@ -46,5 +46,6 @@ JOIN
 1   SELECT COUNT(ospiti.name)>2 , ospiti.name FROM ospiti JOIN prenotazioni_has_ospiti ON prenotazioni_has_ospiti.ospite_id = ospiti.id GROUP BY ospiti.name
 2   SELECT prenotazioni_has_ospiti.prenotazione_id, ospiti.name, ospiti.lastname  FROM ospiti JOIN prenotazioni_has_ospiti ON prenotazioni_has_ospiti.ospite_id = ospiti.id
 3   SELECT paganti.name, paganti.lastname, pagamenti.price FROM pagamenti JOIN paganti ON pagamenti.pagante_id = paganti.id WHERE MONTH(pagamenti.created_at) =05
-4   SELECT prenotazione_id, paganti.name, paganti.lastname, paganti.address  FROM prenotazioni_has_ospiti JOIN paganti ON paganti.ospite_id = prenotazioni_has_ospiti.ospite_id WHERE prenotazione_id = 7
-5   SELECT * FROM prenotazioni  RIGHT JOIN stanze ON prenotazioni.stanza_id = stanze.id WHERE prenotazioni.stanza_id IS NULL
+4   SELECT SUM(pagamenti.price) FROM pagamenti JOIN prenotazioni ON pagamenti.prenotazione_id = prenotazioni.id JOIN stanze ON prenotazioni.stanza_id = stanze.id WHERE stanze.floor = 1
+5   SELECT prenotazione_id, paganti.name, paganti.lastname, paganti.address  FROM prenotazioni_has_ospiti JOIN paganti ON paganti.ospite_id = prenotazioni_has_ospiti.ospite_id WHERE prenotazione_id = 7
+6   SELECT * FROM prenotazioni  RIGHT JOIN stanze ON prenotazioni.stanza_id = stanze.id WHERE prenotazioni.stanza_id IS NULL  // oppure // SELECT * FROM stanze LEFT JOIN prenotazioni ON stanze.id = prenotazioni.stanza_id WHERE prentoazioni.stanze_Id IS NULL
